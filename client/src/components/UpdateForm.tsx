@@ -5,7 +5,7 @@ import {
   getRestaurantById,
   resetInitialState,
   updateRestaurant,
-} from "../store/reducers/restaurantReducer";
+} from "../store/reducers/restaurant/restaurantReducer";
 
 const UpdateForm = () => {
   const { restaurant,  isSuccess, isError, message } = useAppSelector(

@@ -1,13 +1,18 @@
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../store/typedHooks";
-import { createRestaurant } from "../store/reducers/restaurantReducer";
+import { createRestaurant } from "../store/reducers/restaurant/restaurantReducer";
+import { decryptUserId } from "../utils";
+
 
 const AddRestaurant = () => {
+  const { user } = useAppSelector((state) => state.user);
+  const {id:userId} = decryptUserId(user.token);
   const dispatch = useAppDispatch();
   const [newRestaurant, setNewRestaurant] = useState({
     name: "",
     location: "",
     price_range: 0,
+    user_id: userId
   });
 
   const addNewRestaurant = (e: React.FormEvent<HTMLFormElement>) => {
@@ -18,6 +23,7 @@ const AddRestaurant = () => {
       alert("Please fill out all fields");
     }
   };
+
 
   return (
     <div className="mb-4">

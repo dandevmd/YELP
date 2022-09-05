@@ -1,8 +1,10 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import restaurantReducer from './reducers/restaurantReducer';
+import restaurantReducer from './reducers/restaurant/restaurantReducer';
+import userReducer from './reducers/user/userReducer';
 
 export const store = configureStore({
   reducer:{
+    user: userReducer,
     restaurant: restaurantReducer,
   }
 });

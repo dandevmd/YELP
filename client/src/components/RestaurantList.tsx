@@ -1,19 +1,27 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../store/typedHooks";
 import {
   resetInitialState,
   getRestaurants,
   deleteRestaurant,
-} from "../store/reducers/restaurantReducer";
+} from "../store/reducers/restaurant/restaurantReducer";
 import { Restaurant } from "../appTypes";
 import StarRating from "./StarRating";
+import { decryptUserId } from "../utils";
 
 const RestaurantList = () => {
   const { restaurants } = useAppSelector((state) => state.restaurant);
+  const { user } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
+  let userId: string;
+  if (user) {
+    const { id } = decryptUserId(user.token);
+    if (id) {
+      userId = id;
+    }
+  }
   useEffect(() => {
     dispatch(getRestaurants());
   }, [deleteRestaurant]);
@@ -32,7 +40,6 @@ const RestaurantList = () => {
   const handleSelect = (id: number) => {
     navigate(`/restaurants/${id}`);
   };
-
 
   return (
     <table className="table table-dark">
@@ -68,18 +75,22 @@ const RestaurantList = () => {
                   </td>
                   <td scope="col">{"$".repeat(restaurant.price_range)}</td>
                   <td scope="col">
-                    <button
-                      className="btn btn-warning px-4 mr-5"
-                      onClick={() => editHandler(restaurant.id)}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      className="btn btn-danger px-4"
-                      onClick={() => deleteHandler(restaurant.id)}
-                    >
-                      Delete
-                    </button>
+                    {restaurant.user_id === userId ? (
+                      <>
+                        <button
+                          className="btn btn-warning px-4 mr-5"
+                          onClick={() => editHandler(restaurant.id)}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          className="btn btn-danger px-4"
+                          onClick={() => deleteHandler(restaurant.id)}
+                        >
+                          Delete
+                        </button>
+                      </>
+                    ) : null}
                   </td>
                 </tr>
               );

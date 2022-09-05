@@ -15,8 +15,9 @@ class RestaurantsController {
     constructor() {
         this.createRestaurant = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
-                const { name, location, price_range } = req.body;
-                const newRestaurant = yield index_1.pool.query("INSERT INTO restaurants (name, location, price_range) VALUES ($1, $2, $3) RETURNING *", [name, location, price_range]);
+                const { name, location, price_range, user_id } = req.body;
+                console.log(user_id);
+                const newRestaurant = yield index_1.pool.query("INSERT INTO restaurants (name, location, price_range, user_id) VALUES ($1, $2, $3,$4) RETURNING *", [name, location, price_range, user_id]);
                 res.status(201).json({
                     message: "Restaurant created successfully",
                     newRestaurant: newRestaurant.rows[0],

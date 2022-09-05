@@ -1,9 +1,10 @@
 import { FormEvent, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../store/typedHooks";
-import { addReview } from "../store/reducers/restaurantReducer";
+import { addReview } from "../store/reducers/restaurant/restaurantReducer";
 
 const AddReview = () => {
+  const {user} = useAppSelector((state)=>state.user)
   const dispatch = useAppDispatch();
   const params = useParams();
   const [formInfo, setFormInfo] = useState({
@@ -30,8 +31,7 @@ const AddReview = () => {
   };
   
 
-  return (
-    <div
+  return  user && (<div
       style={{
         margin: "0 5%",
       }}
@@ -98,7 +98,7 @@ const AddReview = () => {
         </button>
       </form>
     </div>
-  );
+  )
 };
 
 export default AddReview;

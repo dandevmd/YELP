@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/typedHooks";
-import { getRestaurantById } from "../../store/reducers/restaurantReducer";
+import { getRestaurantById } from "../../store/reducers/restaurant/restaurantReducer";
 import { useParams } from "react-router-dom";
 
 import ReviewsCart from "../../components/ReviewsCart";

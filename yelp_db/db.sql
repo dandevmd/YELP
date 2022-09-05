@@ -28,3 +28,15 @@ ADD COLUMN  restaurant_id;
 ALTER TABLE reviews ADD FOREIGN KEY (restaurant_id) REFERENCES restaurants(id);
 
 ALTER TABLE reviews ALTER COLUMN restaurant_id SET NOT NULL;
+
+CREATE TABLE users (
+  user_id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
+  username VARCHAR(50) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  email VARCHAR(50) NOT NULL
+);
+
+ALTER TABLE restaurants
+ADD CONSTRAINT user_id_fk
+FOREIGN KEY (user_id) 
+REFERENCES users (user_id);

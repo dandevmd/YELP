@@ -4,10 +4,11 @@ import { pool } from "../db/index";
 class RestaurantsController {
   createRestaurant = async (req: Request, res: Response) => {
     try {
-      const { name, location, price_range } = req.body;
+      const { name, location, price_range, user_id } = req.body;
+      console.log(user_id)
       const newRestaurant = await pool.query(
-        "INSERT INTO restaurants (name, location, price_range) VALUES ($1, $2, $3) RETURNING *",
-        [name, location, price_range]
+        "INSERT INTO restaurants (name, location, price_range, user_id) VALUES ($1, $2, $3,$4) RETURNING *",
+        [name, location, price_range, user_id]
       );
       res.status(201).json({
         message: "Restaurant created successfully",

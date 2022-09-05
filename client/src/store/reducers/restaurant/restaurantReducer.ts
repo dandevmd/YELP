@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { NewRestaurant, Restaurant, Review } from "../../appTypes";
+import { NewRestaurant, Restaurant, Review } from "../../../appTypes";
 import { restaurantService } from "./resService";
 
 const initialState = {

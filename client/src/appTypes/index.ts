@@ -5,12 +5,14 @@ export interface Restaurant {
   rating: number;
   price_range: number;
   average_rating?: number
+  user_id?:string
 }
 
 export interface NewRestaurant {
   name: string;
   location: string;
   price_range: number;
+  user_id:string;
 }
 
 export interface Review {
@@ -19,4 +21,11 @@ export interface Review {
   rating: number;
   body: string;
   name: string;
+}
+
+export interface User{
+  user_id: string
+  username: string
+  password: string
+  email:string
 }
